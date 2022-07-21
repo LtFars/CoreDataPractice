@@ -94,7 +94,7 @@ class MainScreenViewController: UIViewController {
     // MARK: - Actions
     
     @objc func confirmAction() {
-        print("ewfdwefwef")
+        // Actions
     }
 }
 
@@ -138,6 +138,8 @@ extension MainScreenViewController: UITableViewDelegate {
         didSelectRowAt indexPath: IndexPath
     ) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let viewController = ProfileCardViewController()
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
