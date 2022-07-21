@@ -15,6 +15,9 @@
 		039008C72889B58E002BC9A3 /* MainScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039008C62889B58E002BC9A3 /* MainScreenAssembly.swift */; };
 		039008C92889B654002BC9A3 /* MainScreenViewControllerInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039008C82889B654002BC9A3 /* MainScreenViewControllerInput.swift */; };
 		039008CB2889B67A002BC9A3 /* MainScreenViewControllerOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039008CA2889B67A002BC9A3 /* MainScreenViewControllerOutput.swift */; };
+		039008CE2889BBB3002BC9A3 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039008CD2889BBB3002BC9A3 /* UIView+Extension.swift */; };
+		039008D02889BF41002BC9A3 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039008CF2889BF41002BC9A3 /* UIViewController+Extension.swift */; };
+		039008D22889C3A3002BC9A3 /* MainScreenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039008D12889C3A3002BC9A3 /* MainScreenTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		039008C62889B58E002BC9A3 /* MainScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenAssembly.swift; sourceTree = "<group>"; };
 		039008C82889B654002BC9A3 /* MainScreenViewControllerInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewControllerInput.swift; sourceTree = "<group>"; };
 		039008CA2889B67A002BC9A3 /* MainScreenViewControllerOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewControllerOutput.swift; sourceTree = "<group>"; };
+		039008CD2889BBB3002BC9A3 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		039008CF2889BF41002BC9A3 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		039008D12889C3A3002BC9A3 /* MainScreenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +95,7 @@
 			children = (
 				039008BF2889B3AD002BC9A3 /* App */,
 				039008C02889B3B5002BC9A3 /* MainScreen */,
+				039008CC2889BBA1002BC9A3 /* Extensions */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -139,10 +146,28 @@
 		039008C32889B54C002BC9A3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				039008D32889C3A5002BC9A3 /* Cell */,
 				039008AB2889B165002BC9A3 /* MainScreenViewController.swift */,
 				039008C82889B654002BC9A3 /* MainScreenViewControllerInput.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		039008CC2889BBA1002BC9A3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				039008CD2889BBB3002BC9A3 /* UIView+Extension.swift */,
+				039008CF2889BF41002BC9A3 /* UIViewController+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		039008D32889C3A5002BC9A3 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				039008D12889C3A3002BC9A3 /* MainScreenTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,9 +240,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				039008D02889BF41002BC9A3 /* UIViewController+Extension.swift in Sources */,
 				039008CB2889B67A002BC9A3 /* MainScreenViewControllerOutput.swift in Sources */,
+				039008CE2889BBB3002BC9A3 /* UIView+Extension.swift in Sources */,
 				039008C72889B58E002BC9A3 /* MainScreenAssembly.swift in Sources */,
 				039008AC2889B165002BC9A3 /* MainScreenViewController.swift in Sources */,
+				039008D22889C3A3002BC9A3 /* MainScreenTableViewCell.swift in Sources */,
 				039008A82889B165002BC9A3 /* AppDelegate.swift in Sources */,
 				039008C52889B581002BC9A3 /* MainScreenPresenter.swift in Sources */,
 				039008C92889B654002BC9A3 /* MainScreenViewControllerInput.swift in Sources */,
