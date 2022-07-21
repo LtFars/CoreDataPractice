@@ -15,4 +15,24 @@ extension UIView {
             self.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -gap)
         ])
     }
+    
+    func pinSeparator(
+        to view: UIView,
+        xMargin: CGFloat = 0,
+        yMargin: CGFloat = 0
+    ) {
+        self.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            self.topAnchor.constraint(equalTo: view.bottomAnchor, constant: yMargin),
+            self.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: xMargin),
+            self.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -xMargin),
+            self.heightAnchor.constraint(equalToConstant: 1)
+        ])
+    }
+    
+    static func separator(color: UIColor) -> UIView {
+        let view = UIView()
+        view.backgroundColor = .gray
+        return view
+    }
 }
