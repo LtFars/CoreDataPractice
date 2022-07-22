@@ -8,5 +8,8 @@
 import Foundation
 
 protocol MainScreenViewControllerOutput: AnyObject {
-    
+    func fetchProfiles()
+    func saveProfile(with name: String)
+    func deleteProfile(_ profile: ProfileCardEntity)
+    func changeProfile(_ profile: ProfileCard)
 }

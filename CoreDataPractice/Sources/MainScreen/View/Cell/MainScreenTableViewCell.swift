@@ -34,7 +34,8 @@ final class MainScreenTableViewCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: contentView.topAnchor),
-            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            label.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
     

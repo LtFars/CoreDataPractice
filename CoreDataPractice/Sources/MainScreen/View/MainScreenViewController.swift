@@ -45,6 +45,8 @@ class MainScreenViewController: UIViewController {
     }()
     
     var presenter: MainScreenViewControllerOutput?
+    private var profiles = [ProfileCardEntity]()
+    private var profileCard: ProfileCardViewControllerInput?
     
     // MARK: - Lifecycle
     
@@ -53,6 +55,12 @@ class MainScreenViewController: UIViewController {
         setupView()
         setupHierarchy()
         setupLayout()
+        presenter?.fetchProfiles()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        profileCard = nil
     }
     
     // MARK: - Private functions
@@ -94,7 +102,19 @@ class MainScreenViewController: UIViewController {
     // MARK: - Actions
     
     @objc func confirmAction() {
-        // Actions
+        
+        guard let name = inputTextField.text,
+              !name.isEmpty else { return }
+        
+        let existedProfiles = profiles.compactMap { $0.name }
+        let isDouplicate = existedProfiles.contains(name)
+        
+        if !isDouplicate {
+            presenter?.saveProfile(with: name)
+        } else {
+            let message = "Current user exist already"
+            showErrorAlert(title: "Error", message: message)
+        }
     }
 }
 
@@ -102,6 +122,28 @@ class MainScreenViewController: UIViewController {
 
 extension MainScreenViewController: MainScreenViewControllerInput {
     
+    func updateEntireTable(with profiles: [ProfileCardEntity]) {
+        self.profiles = profiles
+        tableView.reloadData()
+    }
+    
+    func update(with profile: ProfileCardEntity) {
+        let existedProfile = profiles.first(where: { $0.id == profile.id })
+        if let existedProfile = existedProfile {
+            existedProfile.name = profile.name
+            existedProfile.birthdayDate = profile.birthdayDate
+            existedProfile.gender = profile.gender
+        } else {
+            profiles.append(profile)
+        }
+        profileCard?.refreshProfileCard(by: profile)
+        tableView.reloadData()
+    }
+    
+    func showError(_ error: CoreDataError) {
+        showErrorAlert(title: "Error", message: error.message)
+        profileCard?.refreshProfileCard(by: nil)
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -112,7 +154,7 @@ extension MainScreenViewController: UITableViewDataSource {
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        5
+        profiles.count
     }
     
     func tableView(
@@ -125,7 +167,9 @@ extension MainScreenViewController: UITableViewDataSource {
         ) as? MainScreenTableViewCell else {
             return UITableViewCell()
         }
-        cell.configure(with: "Cell \(indexPath.row + 1)")
+        let profile = profiles[indexPath.row]
+        let name = profile.name ?? ""
+        cell.configure(with: name)
         return cell
     }
 }
@@ -138,16 +182,42 @@ extension MainScreenViewController: UITableViewDelegate {
         didSelectRowAt indexPath: IndexPath
     ) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let viewController = ProfileCardViewController()
+        let profile = profiles[indexPath.row]
+        let viewController = ProfileCardViewController(profile: profile)
+        viewController.saveProfile = { profile in
+            self.presenter?.changeProfile(profile)
+        }
+        profileCard = viewController
         self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
+        
+        let profile = profiles[indexPath.row]
+        
+        let delete = UIContextualAction(
+            style: .destructive,
+            title: String()
+        ) { (_, _, completion) in
+            self.presenter?.deleteProfile(profile)
+            completion(true)
+        }
+        
+        delete.image = UIImage(systemName: "trash")
+        delete.backgroundColor = .red
+     
+        let config = UISwipeActionsConfiguration(actions: [delete])
+        config.performsFirstActionWithFullSwipe = true
+        return config
     }
 }
 
 // MARK: - UITextFieldDelegate
 
-extension MainScreenViewController: UITextFieldDelegate {
-    
-}
+extension MainScreenViewController: UITextFieldDelegate {}
 
 // MARK: - Metric
 

@@ -19,6 +19,11 @@
 		039008D02889BF41002BC9A3 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039008CF2889BF41002BC9A3 /* UIViewController+Extension.swift */; };
 		039008D22889C3A3002BC9A3 /* MainScreenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039008D12889C3A3002BC9A3 /* MainScreenTableViewCell.swift */; };
 		039008D62889C952002BC9A3 /* ProfileCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039008D52889C952002BC9A3 /* ProfileCardViewController.swift */; };
+		039008DA2889EB88002BC9A3 /* ProfileCards.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 039008D82889EB88002BC9A3 /* ProfileCards.xcdatamodeld */; };
+		039008E02889F6D4002BC9A3 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039008DF2889F6D4002BC9A3 /* CoreDataManager.swift */; };
+		039008EE288A2565002BC9A3 /* ProfileCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039008ED288A2565002BC9A3 /* ProfileCardModel.swift */; };
+		039008F0288ABA30002BC9A3 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039008EF288ABA30002BC9A3 /* CoreDataError.swift */; };
+		039008F4288AC21D002BC9A3 /* ProfileCardViewControllerInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039008F3288AC21D002BC9A3 /* ProfileCardViewControllerInput.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +41,11 @@
 		039008CF2889BF41002BC9A3 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		039008D12889C3A3002BC9A3 /* MainScreenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenTableViewCell.swift; sourceTree = "<group>"; };
 		039008D52889C952002BC9A3 /* ProfileCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCardViewController.swift; sourceTree = "<group>"; };
+		039008D92889EB88002BC9A3 /* ProfileCardModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ProfileCardModel.xcdatamodel; sourceTree = "<group>"; };
+		039008DF2889F6D4002BC9A3 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		039008ED288A2565002BC9A3 /* ProfileCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCardModel.swift; sourceTree = "<group>"; };
+		039008EF288ABA30002BC9A3 /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
+		039008F3288AC21D002BC9A3 /* ProfileCardViewControllerInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCardViewControllerInput.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +87,7 @@
 		039008BB2889B253002BC9A3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				039008D72889EB5E002BC9A3 /* CoreData */,
 				039008BE2889B293002BC9A3 /* Storyboards */,
 				039008BC2889B25F002BC9A3 /* Config */,
 				039008B02889B167002BC9A3 /* Assets.xcassets */,
@@ -95,6 +106,7 @@
 		039008BD2889B26D002BC9A3 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				039008DE2889F6B7002BC9A3 /* CoreDataManager */,
 				039008BF2889B3AD002BC9A3 /* App */,
 				039008C02889B3B5002BC9A3 /* MainScreen */,
 				039008CC2889BBA1002BC9A3 /* Extensions */,
@@ -122,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				039008C12889B53C002BC9A3 /* Assembly */,
+				039008EC288A254C002BC9A3 /* Model */,
 				039008C32889B54C002BC9A3 /* View */,
 				039008C22889B546002BC9A3 /* Presenter */,
 			);
@@ -177,8 +190,34 @@
 			isa = PBXGroup;
 			children = (
 				039008D52889C952002BC9A3 /* ProfileCardViewController.swift */,
+				039008F3288AC21D002BC9A3 /* ProfileCardViewControllerInput.swift */,
 			);
 			path = ProfileCard;
+			sourceTree = "<group>";
+		};
+		039008D72889EB5E002BC9A3 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				039008D82889EB88002BC9A3 /* ProfileCards.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		039008DE2889F6B7002BC9A3 /* CoreDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				039008DF2889F6D4002BC9A3 /* CoreDataManager.swift */,
+				039008EF288ABA30002BC9A3 /* CoreDataError.swift */,
+			);
+			path = CoreDataManager;
+			sourceTree = "<group>";
+		};
+		039008EC288A254C002BC9A3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				039008ED288A2565002BC9A3 /* ProfileCardModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,10 +291,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				039008D02889BF41002BC9A3 /* UIViewController+Extension.swift in Sources */,
+				039008EE288A2565002BC9A3 /* ProfileCardModel.swift in Sources */,
 				039008CB2889B67A002BC9A3 /* MainScreenViewControllerOutput.swift in Sources */,
+				039008DA2889EB88002BC9A3 /* ProfileCards.xcdatamodeld in Sources */,
 				039008CE2889BBB3002BC9A3 /* UIView+Extension.swift in Sources */,
+				039008F0288ABA30002BC9A3 /* CoreDataError.swift in Sources */,
 				039008C72889B58E002BC9A3 /* MainScreenAssembly.swift in Sources */,
 				039008AC2889B165002BC9A3 /* MainScreenViewController.swift in Sources */,
+				039008F4288AC21D002BC9A3 /* ProfileCardViewControllerInput.swift in Sources */,
+				039008E02889F6D4002BC9A3 /* CoreDataManager.swift in Sources */,
 				039008D22889C3A3002BC9A3 /* MainScreenTableViewCell.swift in Sources */,
 				039008A82889B165002BC9A3 /* AppDelegate.swift in Sources */,
 				039008C52889B581002BC9A3 /* MainScreenPresenter.swift in Sources */,
@@ -472,6 +516,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		039008D82889EB88002BC9A3 /* ProfileCards.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				039008D92889EB88002BC9A3 /* ProfileCardModel.xcdatamodel */,
+			);
+			currentVersion = 039008D92889EB88002BC9A3 /* ProfileCardModel.xcdatamodel */;
+			path = ProfileCards.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 0390089C2889B165002BC9A3 /* Project object */;
 }

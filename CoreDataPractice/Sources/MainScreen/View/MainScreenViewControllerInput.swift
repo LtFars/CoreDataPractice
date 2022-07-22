@@ -8,5 +8,7 @@
 import Foundation
 
 protocol MainScreenViewControllerInput: AnyObject {
-    
+    func updateEntireTable(with profiles: [ProfileCardEntity])
+    func update(with profile: ProfileCardEntity)
+    func showError(_ error: CoreDataError)
 }

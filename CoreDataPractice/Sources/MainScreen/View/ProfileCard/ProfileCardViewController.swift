@@ -34,7 +34,7 @@ class ProfileCardViewController: UIViewController {
     
     private lazy var birthdayTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Birthday"
+        textField.placeholder = "Birthday '01.01.2004'"
         textField.autocorrectionType = .no
         textField.autocapitalizationType = .none
         textField.returnKeyType = .done
@@ -55,8 +55,16 @@ class ProfileCardViewController: UIViewController {
     let fullnameTextFieldSeparator = UIView.separator(color: .gray)
     let birthdayTextFieldSeparator = UIView.separator(color: .gray)
     let sexTextFieldSeparator = UIView.separator(color: .gray)
-        
+    
+    private var profile: ProfileCardEntity?
+    var saveProfile: ((ProfileCard) -> Void)?
+    
     // MARK: - Lifecycle
+    
+    convenience init(profile: ProfileCardEntity) {
+        self.init(nibName:nil, bundle:nil)
+        self.profile = profile
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,13 +79,13 @@ class ProfileCardViewController: UIViewController {
         
         setupTopButtons(action: #selector(editAction))
         
-        title = "User Profile"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         view.backgroundColor = .white
         fullnameTextField.delegate = self
         birthdayTextField.delegate = self
         sexTextField.delegate = self
         hideKeyboardWhenTappedAround()
+        setupProfile()
     }
     
     private func setupHierarchy() {
@@ -117,6 +125,22 @@ class ProfileCardViewController: UIViewController {
         ])
     }
     
+    private func setupProfile() {
+        
+        title = profile?.name == nil
+        ? "User Profile"
+        : profile?.name
+        
+        fullnameTextField.text = profile?.name
+        sexTextField.text = profile?.gender
+        
+        guard let date = profile?.birthdayDate else { return }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        dateFormatter.dateStyle = .long
+        birthdayTextField.text = dateFormatter.string(from: date)
+    }
+    
     // MARK: - Actions
     
     @objc private func editAction() {
@@ -137,15 +161,50 @@ class ProfileCardViewController: UIViewController {
         birthdayTextField.isUserInteractionEnabled = false
         sexTextField.isUserInteractionEnabled = false
         
-        // Actions
+        guard let name = fullnameTextField.text,
+              !name.isEmpty,
+              let id = profile?.id else { return }
+        
+        var birthdayDate: Date?
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        if let dateStr = birthdayTextField.text,
+           !dateStr.isEmpty,
+           let date = dateFormatter.date(from: dateStr) {
+            birthdayDate = date
+        }
+        
+        let gender = sexTextField.text
+        
+        let profile = ProfileCard(
+            name: name,
+            id: id,
+            birthdayDate: birthdayDate,
+            gender: gender
+        )
+        
+        saveProfile?(profile)
     }
+}
+
+// MARK: - ProfileCardViewControllerInput
+
+extension ProfileCardViewController: ProfileCardViewControllerInput {
+    func refreshProfileCard(by profile: ProfileCardEntity?) {
+        if let profile = profile {
+            self.profile = profile
+        }
+        setupProfile()
+    }
+    
+//    func resetProfile() {
+//        setupProfile()
+//    }
 }
 
 // MARK: - UITextFieldDelegate
 
-extension ProfileCardViewController: UITextFieldDelegate {
-    
-}
+extension ProfileCardViewController: UITextFieldDelegate {}
 
 // MARK: - Metric
 

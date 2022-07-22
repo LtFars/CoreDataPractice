@@ -53,4 +53,18 @@ extension UIViewController {
     @objc private func popAction() {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    func showErrorAlert(title: String, message: String) {
+        let alert = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+        let cancelAction = UIAlertAction(
+            title: "Cancel",
+            style: .cancel
+        )
+        alert.addAction(cancelAction)
+        present(alert, animated: true)
+    }
 }
