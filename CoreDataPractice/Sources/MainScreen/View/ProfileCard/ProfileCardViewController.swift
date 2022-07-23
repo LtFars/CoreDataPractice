@@ -57,6 +57,7 @@ class ProfileCardViewController: UIViewController {
     let sexTextFieldSeparator = UIView.separator(color: .gray)
     
     private var profile: ProfileCardEntity?
+    private var selectedField: UITextField?
     var saveProfile: ((ProfileCard) -> Void)?
     
     // MARK: - Lifecycle
@@ -71,6 +72,17 @@ class ProfileCardViewController: UIViewController {
         setupView()
         setupHierarchy()
         setupLayout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     // MARK: - Private functions
@@ -185,6 +197,22 @@ class ProfileCardViewController: UIViewController {
         
         saveProfile?(profile)
     }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            guard let selectedField = selectedField else { return }
+            if view.frame.origin.y == 0 {
+                view.frame.origin.y += keyboardSize.height
+                + selectedField.frame.height
+                - selectedField.frame.origin.y
+                + 32
+            }
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        view.frame.origin.y = 0
+    }
 }
 
 // MARK: - ProfileCardViewControllerInput
@@ -200,7 +228,12 @@ extension ProfileCardViewController: ProfileCardViewControllerInput {
 
 // MARK: - UITextFieldDelegate
 
-extension ProfileCardViewController: UITextFieldDelegate {}
+extension ProfileCardViewController: UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        selectedField = textField
+        return true
+    }
+}
 
 // MARK: - Metric
 
