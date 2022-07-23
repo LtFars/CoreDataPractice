@@ -33,9 +33,7 @@ final class MainScreenTableViewCell: UITableViewCell {
         label.pinToSides(to: contentView)
         
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: contentView.topAnchor),
-            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            label.heightAnchor.constraint(equalToConstant: 40)
+            label.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
     }
     

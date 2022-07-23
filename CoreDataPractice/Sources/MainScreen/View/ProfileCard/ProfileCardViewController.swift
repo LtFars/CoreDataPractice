@@ -133,6 +133,7 @@ class ProfileCardViewController: UIViewController {
         
         fullnameTextField.text = profile?.name
         sexTextField.text = profile?.gender
+        birthdayTextField.text?.removeAll()
         
         guard let date = profile?.birthdayDate else { return }
         let dateFormatter = DateFormatter()
@@ -196,10 +197,6 @@ extension ProfileCardViewController: ProfileCardViewControllerInput {
         }
         setupProfile()
     }
-    
-//    func resetProfile() {
-//        setupProfile()
-//    }
 }
 
 // MARK: - UITextFieldDelegate
