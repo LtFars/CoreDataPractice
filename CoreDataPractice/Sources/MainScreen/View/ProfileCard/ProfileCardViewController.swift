@@ -133,11 +133,12 @@ class ProfileCardViewController: UIViewController {
         
         fullnameTextField.text = profile?.name
         sexTextField.text = profile?.gender
+        birthdayTextField.text?.removeAll()
         
         guard let date = profile?.birthdayDate else { return }
         let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
         dateFormatter.dateFormat = "dd.MM.yyyy"
-        dateFormatter.dateStyle = .long
         birthdayTextField.text = dateFormatter.string(from: date)
     }
     
@@ -166,11 +167,10 @@ class ProfileCardViewController: UIViewController {
               let id = profile?.id else { return }
         
         var birthdayDate: Date?
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd.MM.yyyy"
-        if let dateStr = birthdayTextField.text,
-           !dateStr.isEmpty,
-           let date = dateFormatter.date(from: dateStr) {
+        if let dateStr = birthdayTextField.text {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd.MM.yyyy"
+            let date = dateFormatter.date(from: dateStr)
             birthdayDate = date
         }
         
@@ -196,10 +196,6 @@ extension ProfileCardViewController: ProfileCardViewControllerInput {
         }
         setupProfile()
     }
-    
-//    func resetProfile() {
-//        setupProfile()
-//    }
 }
 
 // MARK: - UITextFieldDelegate

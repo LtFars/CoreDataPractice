@@ -180,11 +180,20 @@ class CoreDataManager {
         do {
             try managedContext.save()
         } catch let error as NSError {
+            
+            // DEBUGGING
             print("Could not save. \(error), \(error.userInfo)")
+            // DEBUGGING
+            
+            if error.code == 1630 {
+                newProfile?.setValue(nil, forKeyPath: "birthdayDate")
+            }
+            
             let error = CoreDataError(
-                error: 3,
-                message: "Could not save current user."
+                error: error.code,
+                message: error.localizedDescription
             )
+            
             completion(.failure(error))
             return
         }

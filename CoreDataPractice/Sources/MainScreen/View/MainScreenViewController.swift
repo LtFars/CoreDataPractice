@@ -159,6 +159,13 @@ extension MainScreenViewController: UITableViewDataSource {
     
     func tableView(
         _ tableView: UITableView,
+        heightForRowAt indexPath: IndexPath
+    ) -> CGFloat {
+        Metric.heightForRowAt
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
@@ -225,5 +232,6 @@ extension MainScreenViewController {
     struct Metric {
         static let standartGap: CGFloat = 16
         static let inputTextFieldHeight: CGFloat = 50
+        static let heightForRowAt: CGFloat = 44
     }
 }
