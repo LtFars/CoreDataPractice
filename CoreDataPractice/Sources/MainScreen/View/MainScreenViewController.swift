@@ -121,7 +121,6 @@ class MainScreenViewController: UIViewController {
 // MARK: - MainScreenViewControllerInput
 
 extension MainScreenViewController: MainScreenViewControllerInput {
-    
     func updateEntireTable(with profiles: [ProfileCardEntity]) {
         self.profiles = profiles
         tableView.reloadData()
@@ -149,7 +148,6 @@ extension MainScreenViewController: MainScreenViewControllerInput {
 // MARK: - UITableViewDataSource
 
 extension MainScreenViewController: UITableViewDataSource {
-    
     func tableView(
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
@@ -224,7 +222,12 @@ extension MainScreenViewController: UITableViewDelegate {
 
 // MARK: - UITextFieldDelegate
 
-extension MainScreenViewController: UITextFieldDelegate {}
+extension MainScreenViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return true
+    }
+}
 
 // MARK: - Metric
 

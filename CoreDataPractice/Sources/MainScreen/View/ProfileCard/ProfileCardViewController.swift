@@ -233,6 +233,11 @@ extension ProfileCardViewController: UITextFieldDelegate {
         selectedField = textField
         return true
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return true
+    }
 }
 
 // MARK: - Metric
