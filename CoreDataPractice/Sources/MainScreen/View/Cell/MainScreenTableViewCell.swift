@@ -28,20 +28,16 @@ final class MainScreenTableViewCell: UITableViewCell {
         label.text?.removeAll()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        label.pinToSides(to: contentView)
-        
-        NSLayoutConstraint.activate([
-            label.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
-        ])
-    }
-    
     // MARK: - Configuration
     
     func configure(with text: String) {
         contentView.addSubview(label)
         accessoryType = .disclosureIndicator
         label.text = text
+        
+        label.pinToSides(to: contentView)
+        NSLayoutConstraint.activate([
+            label.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+        ])
     }
 }
